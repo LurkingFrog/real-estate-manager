@@ -98,27 +98,32 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'apps.main.urls'
 
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-)
+TEMPLATE_DIRS = ()
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'south',
     'django.contrib.admin',
+    'south',
+    'django_extensions',
 
     # My apps
-    'apps.main'
+    'apps.main',
+
+    # Plugins
+    # For the moment, I am just linking this in until I turn it
+    # into a package
+    'apps.data_tables',
+    
+
+
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-)
+]
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -142,6 +147,12 @@ LOGGING = {
         },
     }
 }
+
+#############################################
+#
+#  django-dataTables settings
+#
+
 
 try:
     from main.local_settings import *

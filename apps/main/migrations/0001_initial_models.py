@@ -49,10 +49,11 @@ class Migration(SchemaMigration):
         db.create_table('main_listingclosingagent', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('listing', self.gf('django.db.models.fields.related.ForeignKey')(related_name='agents', to=orm['main.Listing'])),
-            ('agent', self.gf('django.db.models.fields.related.ForeignKey')(related_name='properties', to=orm['main.Agent'])),
+            ('agent', self.gf('django.db.models.fields.related.ForeignKey')(related_name='listings', to=orm['main.Agent'])),
+            ('agent_position', self.gf('django.db.models.fields.CharField')(max_length=20)),
             ('agent_commission', self.gf('django.db.models.fields.DecimalField')(max_digits=10, decimal_places=2)),
             ('broker_commission', self.gf('django.db.models.fields.DecimalField')(max_digits=10, decimal_places=2)),
-            ('referral', self.gf('django.db.models.fields.DecimalField')(max_digits=10, decimal_places=2)),
+            ('referral', self.gf('django.db.models.fields.DecimalField')(default='0.0', max_digits=10, decimal_places=2)),
             ('broker_fee', self.gf('django.db.models.fields.DecimalField')(default='0.0', max_digits=10, decimal_places=2)),
         ))
         db.send_create_signal('main', ['ListingClosingAgent'])
@@ -109,13 +110,14 @@ class Migration(SchemaMigration):
         },
         'main.listingclosingagent': {
             'Meta': {'object_name': 'ListingClosingAgent'},
-            'agent': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'properties'", 'to': "orm['main.Agent']"}),
+            'agent': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'listings'", 'to': "orm['main.Agent']"}),
             'agent_commission': ('django.db.models.fields.DecimalField', [], {'max_digits': '10', 'decimal_places': '2'}),
+            'agent_position': ('django.db.models.fields.CharField', [], {'max_length': '20'}),
             'broker_commission': ('django.db.models.fields.DecimalField', [], {'max_digits': '10', 'decimal_places': '2'}),
             'broker_fee': ('django.db.models.fields.DecimalField', [], {'default': "'0.0'", 'max_digits': '10', 'decimal_places': '2'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'listing': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'agents'", 'to': "orm['main.Listing']"}),
-            'referral': ('django.db.models.fields.DecimalField', [], {'max_digits': '10', 'decimal_places': '2'})
+            'referral': ('django.db.models.fields.DecimalField', [], {'default': "'0.0'", 'max_digits': '10', 'decimal_places': '2'})
         }
     }
 

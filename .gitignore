@@ -18,6 +18,9 @@ sdist
 develop-eggs
 .installed.cfg
 
+# Until I get the app packaged ignore:
+data_tables
+
 # Installer logs
 pip-log.txt
 

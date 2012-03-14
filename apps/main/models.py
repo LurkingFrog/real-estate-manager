@@ -53,6 +53,14 @@ class Agent(models.Model):
         'Listing', through='ListingClosingAgent'
     )
 
+    def __unicode__(self):
+        return (
+            '{first} {last}'
+            .format(
+                first=self.first_name,
+                last=self.last_name,
+            )
+        )
 
 class Listing(models.Model):
     """
@@ -113,6 +121,13 @@ class Listing(models.Model):
         )
 
 
+AGENT_CHOICES = (
+    ('listing', 'listing'),
+    ('selling', 'selling'),
+    ('associate listing', 'assoc_listing'),
+    ('associate seller', 'assoc_sell'),
+)
+
 class ListingClosingAgent(models.Model):
     """
     A list of all agents associated with the closing on a listing.
@@ -120,8 +135,14 @@ class ListingClosingAgent(models.Model):
     """
 
     listing = models.ForeignKey('Listing', related_name='agents')
-    agent = models.ForeignKey('Agent', related_name='properties')
+    agent = models.ForeignKey('Agent', related_name='listings')
 
+# TODO: This needs a better name.
+    agent_position = models.CharField(
+        max_length=20,
+        choices=AGENT_CHOICES,
+    ) 
+        
     agent_commission = models.DecimalField(max_digits=10, decimal_places=2)
     broker_commission = models.DecimalField(max_digits=10, decimal_places=2)
 
@@ -131,7 +152,9 @@ class ListingClosingAgent(models.Model):
     #       a listing level
     # TODO: Could there be more than one or could there be multiples
     #       needing a separate model to document them
-    referral =  models.DecimalField(max_digits=10, decimal_places=2)
+    referral =  models.DecimalField(
+        max_digits=10, decimal_places=2, default='0.0'
+        )
     
     # This is a fee taken off the top of the commission
     # TODO: Is this a one off or could there be multiple requiring a

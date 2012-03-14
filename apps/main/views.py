@@ -1,5 +1,7 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.template import RequestContext
+
+from dt_forms import AgentsDataTable, ListingsDataTable
 
 
 def landing_page(request):
@@ -10,8 +12,20 @@ def landing_page(request):
     template = 'main/landing.html'
     context = dict()
 
-    return render_to_response(
+    return render(
+        request,
         template,
         context,
-        context_instance=RequestContext(request)
+    )
+
+def agents(request):
+    template = 'main/agents.html'
+    context = {
+        'table_type': 'AgentsDataTable'
+    }
+
+    return render(
+        request,
+        template,
+        context,
     )

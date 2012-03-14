@@ -1,0 +1,17 @@
+{% extends "main/base.html" %}
+
+{% block main_body %}
+  <table border=1>
+    <tr>
+      <td>
+	<h2>Agents</h2>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+      {% load django_datatables %}
+      {% add_datatable AgentsDataTable %}
+      </td>
+    </tr>
+  </table>
+{% endblock %}
