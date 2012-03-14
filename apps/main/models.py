@@ -42,8 +42,10 @@ class Agent(models.Model):
     """
     first_name = models.CharField(max_length=512)
     last_name = models.CharField(max_length=512)
+    email = models.CharField(max_length=512, default='', blank=True)
 
-    phone_number = models.CharField(max_length=10)
+    phone_number = models.CharField(max_length=15, default='', blank=True)
+    business_address = models.ForeignKey(Address, null=True)
 
     # The agency the broker belongs to
     # TODO: Add in a new model for this. The charfield is just a place holder
@@ -61,6 +63,10 @@ class Agent(models.Model):
                 last=self.last_name,
             )
         )
+
+    def get_absolute_url(self):
+        return '/agent/{0}'.format(self.id)
+
 
 class Listing(models.Model):
     """

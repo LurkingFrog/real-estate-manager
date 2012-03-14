@@ -11,9 +11,21 @@
       Main Menu goes here<br />
     {% endblock %}
     
+    <table border=1 width="1000px">
+      <tr>
+	<td align="center" id="page_title_cell">
+    {% block page_title %}
+      Page Title Here<br />
+    {% endblock %}
+	</td>
+      </tr>
+      <tr>
+	<td align="center">
     {% block main_body %}
       This is where your main body goes
     {% endblock %}
-    
+	</td>
+      </tr>
+    </table>    
   </body>
 </hmtl>

@@ -26,7 +26,9 @@ class Migration(SchemaMigration):
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('first_name', self.gf('django.db.models.fields.CharField')(max_length=512)),
             ('last_name', self.gf('django.db.models.fields.CharField')(max_length=512)),
+            ('email', self.gf('django.db.models.fields.CharField')(max_length=512)),
             ('phone_number', self.gf('django.db.models.fields.CharField')(max_length=10)),
+            ('business_address', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['main.Address'], null=True)),
             ('broker', self.gf('django.db.models.fields.CharField')(default='LVL', max_length=512, blank=True)),
         ))
         db.send_create_signal('main', ['Agent'])
@@ -89,7 +91,9 @@ class Migration(SchemaMigration):
         'main.agent': {
             'Meta': {'object_name': 'Agent'},
             'broker': ('django.db.models.fields.CharField', [], {'default': "'LVL'", 'max_length': '512', 'blank': 'True'}),
+            'business_address': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['main.Address']", 'null': 'True'}),
             'closed_properties': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['main.Listing']", 'through': "orm['main.ListingClosingAgent']", 'symmetrical': 'False'}),
+            'email': ('django.db.models.fields.CharField', [], {'max_length': '512'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '512'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '512'}),

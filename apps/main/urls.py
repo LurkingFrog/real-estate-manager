@@ -15,7 +15,10 @@ urlpatterns = patterns(
 
     url(r'^$', 'landing_page', name='landing_page'),
     url(r'^agents$', 'agents', name='agent_totals'),
+    url(r'^agent/(?P<agent_id>\d+)$', 'agent_details', name='agent_details'),
+    url(r'^manage/agent/new$', 'manage_agent', name='add_agent'),
+    url(r'^manage/agent/(?P<agent_id>\d+)$', 'manage_agent', name='view_agent'),
+    
 )
-
 
 urlpatterns += staticfiles_urlpatterns()

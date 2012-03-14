@@ -1,6 +1,8 @@
-from django.utils.datastructures import SortedDict
+from decimal import Decimal
 
+from django.core.urlresolvers import reverse
 from django.db.models import Count, Sum
+from django.utils.datastructures import SortedDict
 
 from data_tables.forms import JQueryDataTable, DTColumn, DTButton
 from main.models import Agent
@@ -28,6 +30,15 @@ class AgentsDataTable(JQueryDataTable):
         label='Total Commission'
     )
   
+    add_agent_button = DTButton(
+        label='Add Agent',
+        action_type='JUMP',
+# TODO: Fix the bug preventing reverse from working
+#        target_view=reverse('main:add_agent'),
+        target_view='/manage/agent/new',
+        use_selected='IGNORE'
+    )
+        
     def load_data(self):
         '''
         Gets a list of all the agents and some counts associated with them
@@ -43,8 +54,15 @@ class AgentsDataTable(JQueryDataTable):
             row = self.add_data()
             row['Agent Name'] = agent.__unicode__()
             row['Listings'] = agent.listing_count
-            row['Total GCI'] = agent.commission + agent.broker_commission
-            row['Total Commission'] = agent.commission
+            try:
+                row['Total GCI'] = agent.commission + agent.broker_commission
+            except TypeError:
+                row['Total GCI'] = Decimal('0.0')
+
+            if agent.commission:
+                row['Total Commission'] = agent.commission
+            else:
+                row['Total Commission'] = Decimal('0.0')
 
 class ListingsDataTable(JQueryDataTable):
     pass
