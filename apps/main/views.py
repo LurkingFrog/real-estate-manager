@@ -59,3 +59,24 @@ def manage_agent(request, agent_id=None):
         context['form'] = ManageAgentForm(instance=context['agent'])
 
     return render(request, template, context)
+
+
+def listings(request):
+    template='main/not_yet_implemented.html'
+    context = dict()
+
+    return render(request, template, context)
+
+
+def commissions(request):
+    template='main/not_yet_implemented.html'
+    context = dict()
+
+    return render(request, template, context)
+
+
+def closings(request):
+    template='main/not_yet_implemented.html'
+    context = dict()
+
+    return render(request, template, context)

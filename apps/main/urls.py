@@ -14,10 +14,17 @@ urlpatterns = patterns(
     url(r'^datatables/', include('data_tables.urls')),
 
     url(r'^$', 'landing_page', name='landing_page'),
-    url(r'^agents$', 'agents', name='agent_totals'),
+
+    url(r'^agents$', 'agents', name='agents'),
     url(r'^agent/(?P<agent_id>\d+)$', 'agent_details', name='agent_details'),
     url(r'^manage/agent/new$', 'manage_agent', name='add_agent'),
     url(r'^manage/agent/(?P<agent_id>\d+)$', 'manage_agent', name='view_agent'),
+
+    url(r'^listings$', 'listings', name='listings'),
+
+    url(r'^commissions$', 'commissions', name='commissions'),
+
+    url(r'^closings$', 'closings', name='closings'),
     
 )
 

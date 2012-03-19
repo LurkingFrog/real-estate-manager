@@ -15,7 +15,8 @@ __all__ = [
 
 class AgentsDataTable(JQueryDataTable):
     agent = DTColumn(
-        label='Agent Name'
+        label='Agent Name',
+        custom_render_type='LINK',
     )
 
     listing_count = DTColumn(
@@ -23,11 +24,13 @@ class AgentsDataTable(JQueryDataTable):
     )
 
     total_gci = DTColumn(
-        label='Total GCI'
+        label='Total GCI',
+        default=Decimal('0.00')
     )
 
     total_commission = DTColumn(
-        label='Total Commission'
+        label='Total Commission',
+        default=Decimal('0.00')
     )
   
     add_agent_button = DTButton(
@@ -51,18 +54,23 @@ class AgentsDataTable(JQueryDataTable):
         )
 
         for agent in agents.iterator():
-            row = self.add_data()
-            row['Agent Name'] = agent.__unicode__()
-            row['Listings'] = agent.listing_count
-            try:
-                row['Total GCI'] = agent.commission + agent.broker_commission
-            except TypeError:
-                row['Total GCI'] = Decimal('0.0')
+            row = self.add_data_row()
+            row['Agent Name'].value = agent.__unicode__()
+            row['Agent Name'].format.custom_render_string = \
+                agent.get_absolute_url()
+
+
+            row['Listings'].value = agent.listing_count
 
             if agent.commission:
-                row['Total Commission'] = agent.commission
-            else:
-                row['Total Commission'] = Decimal('0.0')
+                row['Total Commission'].value = agent.commission
+
+            if agent.broker_commission:
+                row['Total GCI'].value = \
+                    agent.commission + agent.broker_commission
+
+
+
 
 class ListingsDataTable(JQueryDataTable):
     pass
