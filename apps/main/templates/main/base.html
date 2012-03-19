@@ -1,5 +1,10 @@
 <html>
   <head>
+    {% block style %}
+    <style type="text/css">
+      @import url("{{STATIC_URL}}main/css/main_menu.css");
+    </style>
+    {% endblock %}
     <title>
       {% block title %}
       Real Estate Manager
@@ -7,20 +12,34 @@
     </title>
   </head>
   <body>
-    {% block main_menu %}
-      Main Menu goes here<br />
-    {% endblock %}
-    
-    <table border=1 width="1000px">
+    <table border=1 width="1000px" id="master_format_table">
       <tr>
-	<td align="center" id="page_title_cell">
+	<td id="main_menu_cell">
+    {% block main_menu %}
+      <a href="/agents" id="main_menu_button_agents" 
+	 class="main_menu_button">Agents
+      </a>
+      <a href="/listings" id="main_menu_button_listings" 
+	 class="main_menu_button">Listings
+      </a>
+      <a href="/closings"id="main_menu_button_closings" 
+	 class="main_menu_button">Closings
+      </a>
+      <a href="/commissions"id="main_menu_button_commissions" 
+	 class="main_menu_button">Commissions
+      </a>
+    {% endblock %}
+	</td>
+      </tr>
+      <tr>
+	<td align="center" id="master_title_cell">
     {% block page_title %}
       Page Title Here<br />
     {% endblock %}
 	</td>
       </tr>
       <tr>
-	<td align="center">
+	<td align="center" id="master_body_cell">
     {% block main_body %}
       This is where your main body goes
     {% endblock %}

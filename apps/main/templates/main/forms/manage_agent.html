@@ -1,0 +1,36 @@
+{% extends "main/base.html" %}
+
+{% block page_title %}
+  <h2>Manage Agent Details</h2>
+{% endblock %}
+
+{% block main_body %}
+  <form id="manage_agent_form" name="manage_agent_form"
+	action="" method="POST">
+    {% csrf_token %}
+    <table width="100%">
+      <tr>
+	<td>
+	  Agent Info
+	</td>
+	<td>
+	  Mailing Address
+	</td>
+      </tr>
+
+      <tr>
+	<td>
+	  {{form.as_p}}
+	</td>
+	<td>
+	  {{form.address_form.as_p}}
+	</td>
+      </tr>
+      <tr>
+	<td colspan=2>
+	  <input type="submit" name="submit" />
+	</td>
+      </tr>
+    </table>
+  </form>
+{% endblock %}

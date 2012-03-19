@@ -1,0 +1,78 @@
+{% extends "main/base.html" %}
+
+{% block page_title %}
+  <h2>
+    Agent Details for {{ agent.first_name }} {{ agent.last_name }}
+  </h2>
+  <a href="/agents" style="font-size=80%">Back to agents</a>
+{% endblock %}
+
+{% block main_body %}
+    <table width="100%">
+      <tr>
+	<td colspan="2">
+	  <h3>Contact Info:</h3>
+	</td>
+      </tr>
+      {% if agent.email %}
+      <tr>
+	<td>
+	  Email
+	</td>
+	<td>
+	  {{agent.email}}
+	</td>
+      </tr>
+      {% endif %}
+      {% if agent.phone %}
+      <tr>
+	<td>
+	  Phone
+	</td>
+	<td>
+	  {{agent.phone}}
+	</td>
+      </tr>
+      {% endif %}
+      <tr>
+	<td>
+	  Business Address:
+	</td>
+	<td>
+	  {% if broker %}{{agent.broker}}<br />{% endif %}
+	  {% if agent.business_address.building %}
+	    {{ agent.business_address.building }}<br />
+	  {% endif %}
+	  {{ agent.business_address.street1 }}<br />
+	  {% if agent.business_address.street2 %}
+	    {{ agent.business_address.street2 }}<br />
+	  {% endif %}
+	  {% if agent.business_address.street3 %}
+	    {{ agent.business_address.street3 }}<br />
+	  {% endif %}
+	  {{ agent.business_address.city }}, {{ agent.business_address.state }}
+	  {{ agent.business_address.postal_code }}
+	</td>
+      </tr>
+      <tr>
+	<td colspan="2">
+	  <h3>Listings<h3>
+	</td>
+      </tr>
+      <tr>
+	<td colspan="2">
+	  <table>
+	  {% for listing in agent.listings.all %}
+	    <tr>
+	      <td style="padding-left: 25px">
+	  {{listing.listing.address}} closed on 
+	  {{listing.listing.closing_date|date:"M d, Y"}} for ${{listing.listing.sale_price}}
+	      </td>
+	    </tr>
+	  {% endfor %}
+	  </table>
+	</td>
+      </tr>
+    </table>
+  </form>
+{% endblock %}

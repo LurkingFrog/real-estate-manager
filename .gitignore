@@ -1,6 +1,12 @@
 # Compiled Python
 *.pyc
 
+# compiled static files
+/static
+
+# Local settings
+local_settings.py
+
 # Sqlite databases shouldn't be persistant
 *.sqlite
 *.sqlite3
