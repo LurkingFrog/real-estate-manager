@@ -16,7 +16,6 @@ __all__ = [
 class AgentsDataTable(JQueryDataTable):
     agent = DTColumn(
         label='Agent Name',
-        custom_render_type='LINK',
     )
 
     listing_count = DTColumn(
@@ -56,8 +55,7 @@ class AgentsDataTable(JQueryDataTable):
         for agent in agents.iterator():
             row = self.add_data_row()
             row['Agent Name'].value = agent.__unicode__()
-            row['Agent Name'].format.custom_render_string = \
-                agent.get_absolute_url()
+            row['Agent Name'].format.link_url = agent.get_absolute_url()
 
 
             row['Listings'].value = agent.listing_count
