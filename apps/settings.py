@@ -12,7 +12,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '/var/www/real_estate/real_estate_db.sqlite',
+        'NAME': '/var/www/real_estate/db/real_estate_db.sqlite',
     }
 }
 

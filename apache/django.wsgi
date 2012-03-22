@@ -2,7 +2,9 @@ import os, sys
 
 prev_sys_path = list(sys.path)
 
+sys.path.append('/var/www/real_estate/')
 sys.path.append('/var/www/real_estate/apps')
+sys.path.append('/var/www/real_estate/apps/main')
 
 import site
 site.addsitedir('/home/dfogelson/pyenv/py27/lib/python2.7/site-packages/')
@@ -14,5 +16,5 @@ for item in new_sys_path:
 sys.path[:0] = new_sys_path
 
 from django.core.handlers.wsgi import WSGIHandler
-os.environ['DJANGO_SETTINGS_MODULE'] = 'main.settings'
-application = django.core.handlers.wsgi.WSGIHandler()
+os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+application = WSGIHandler()
